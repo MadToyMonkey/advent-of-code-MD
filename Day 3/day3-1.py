@@ -15,7 +15,107 @@ import csv, re
 with open('Day 3\input.csv', newline='\n') as f:
     reader = csv.reader(f,)
     data = list(reader)
+def sym_check(i,j,list):
+    if '*'|'#'|'+'|'$' in list[i][j]:
+            if(list[i][j-1].isnumeric()):
+                r = list[i][j-1] + list[i][j]
+                if(list[i][j+1].isnumeric()):
+                    r = r + list[i][j+1]
+                    list[i][j+1] = 'x'
+                list[i][j-1] = 'x'
+            list[i][j] = 'x'
+            return r
+def num_check(i,j,list):
+    '''check if element is a number'''
+    if(list[i][j].isnumeric()):
+        if '*'|'#'|'+'|'$' in list[i-1][j-1]:
+            if(list[i][j-1].isnumeric()):
+                r = list[i][j-1] + list[i][j]
+                if(list[i][j+1].isnumeric()):
+                    r = r + list[i][j+1]
+                    list[i][j+1] = 'x'
+                list[i][j-1] = 'x'
+            list[i][j] = 'x'
+            return r
+        if '*'|'#'|'+'|'$' in list[i-1][j-1]:
+            if(list[i][j-1].isnumeric()):
+                r = list[i][j-1] + list[i][j]
+                if(list[i][j+1].isnumeric()):
+                    r = r + list[i][j+1]
+                    list[i][j+1] = 'x'
+                list[i][j-1] = 'x'
+            list[i][j] = 'x'
+            return r
+        if '*'|'#'|'+'|'$' in list[i][j-1]:
+            if(list[i][j-1].isnumeric()):
+                r = list[i][j-1] + list[i][j]
+                if(list[i][j+1].isnumeric()):
+                    r = r + list[i][j+1]
+                    list[i][j+1] = 'x'
+                list[i][j-1] = 'x'
+            list[i][j] = 'x'
+            return r
+        if '*'|'#'|'+'|'$' in list[i+1][j-1]:
+            if(list[i][j-1].isnumeric()):
+                r = list[i][j-1] + list[i][j]
+                if(list[i][j+1].isnumeric()):
+                    r = r + list[i][j+1]
+                    list[i][j+1] = 'x'
+                list[i][j-1] = 'x'
+            list[i][j] = 'x'
+            return r
+        if '*'|'#'|'+'|'$' in list[i-1][j]:
+            if(list[i][j-1].isnumeric()):
+                r = list[i][j-1] + list[i][j]
+                if(list[i][j+1].isnumeric()):
+                    r = r + list[i][j+1]
+                    list[i][j+1] = 'x'
+                list[i][j-1] = 'x'
+            list[i][j] = 'x'
+            return r
+        if '*'|'#'|'+'|'$' in list[i+1][j]:
+            if(list[i][j-1].isnumeric()):
+                r = list[i][j-1] + list[i][j]
+                if(list[i][j+1].isnumeric()):
+                    r = r + list[i][j+1]
+                    list[i][j+1] = 'x'
+                list[i][j-1] = 'x'
+            list[i][j] = 'x'
+            return r
+        if '*'|'#'|'+'|'$' in list[i-1][j+1]:
+            if(list[i][j-1].isnumeric()):
+                r = list[i][j-1] + list[i][j]
+                if(list[i][j+1].isnumeric()):
+                    r = r + list[i][j+1]
+                    list[i][j+1] = 'x'
+                list[i][j-1] = 'x'
+            list[i][j] = 'x'
+            return r
+        if '*'|'#'|'+'|'$' in list[i][j+1]:
+            if(list[i][j-1].isnumeric()):
+                r = list[i][j-1] + list[i][j]
+                if(list[i][j+1].isnumeric()):
+                    r = r + list[i][j+1]
+                    list[i][j+1] = 'x'
+                list[i][j-1] = 'x'
+            list[i][j] = 'x'
+            return r
+        if '*'|'#'|'+'|'$' in list[i+1][j+1]:
+            if(list[i][j-1].isnumeric()):
+                r = list[i][j-1] + list[i][j]
+                if(list[i][j+1].isnumeric()):
+                    r = r + list[i][j+1]
+                    list[i][j+1] = 'x'
+                list[i][j-1] = 'x'
+            list[i][j] = 'x'
+            return r
 
+element = []
 for line in data:
-    num = re.search(r"\d+",str(line))
-    print(num)
+    for x in line:
+        z = []
+        for y in x: z = z + ([*y])
+    element.append(z)
+
+
+#print(data)
