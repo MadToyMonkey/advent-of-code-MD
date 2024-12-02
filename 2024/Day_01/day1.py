@@ -2,7 +2,7 @@
 # organize lists from smallest to largest
 import numpy as np
 
-data = np.loadtxt("2024\Day_01\data.txt", delimiter=None)
+data = np.loadtxt("2024\Day_01\\data.txt", delimiter=None)
 left = np.sort(data[:, 0])
 right = np.sort(data[:, 1])
 
@@ -18,3 +18,10 @@ while x < len(left):
 print(sum(paired))
 
 ## Part 2
+# determine the similarity score of the two lists
+simi = []
+x = 0
+while x < len(left):
+    simi.append(np.count_nonzero(right == left[x]) * left[x])
+    x += 1
+print(sum(simi))
