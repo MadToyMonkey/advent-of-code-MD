@@ -1,13 +1,10 @@
-# Advent of Code Day 3 - 1
+# Advent of Code Day 3 - 2
 '''
-The engineer explains that an engine part seems to be missing from the engine, but nobody can figure out which one. 
-If you can add up all the part numbers in the engine schematic, it should be easy to work out which part is missing.
+The missing part wasn't the only issue - one of the gears in the engine is wrong. A gear is any * symbol that is adjacent to exactly two part numbers. 
+Its gear ratio is the result of multiplying those two numbers together.
 
-The engine schematic (your puzzle input) consists of a visual representation of the engine. 
-There are lots of numbers and symbols you don't really understand, but apparently any number adjacent to a symbol, even diagonally, is a "part number" and should be included in your part. 
-(Periods (.) do not count as a symbol.)
-
-What is the part of all of the part numbers in the engine schematic?
+This time, you need to find the gear ratio of every gear and add them all up so that the engineer can figure out which gear needs to be replaced.
+What is the sum of all of the gear ratios in your engine schematic?
 '''
 
 import csv, re
@@ -43,10 +40,12 @@ for line in data:
         for y in x: z = z + ([*y])
     element.append(z)
 
-part = []
+
+product = []
 # determine if element is symbol
 for i,x in enumerate(element):
     for j,y in enumerate(x):
+        part = []
         if not y.isalnum():
             if not y=='.':
                 #print (y)
@@ -67,10 +66,15 @@ for i,x in enumerate(element):
                 if num7 != None: part.append(num7)
                 num8 = num_check(i+1,j+1,element)
                 if num8 != None: part.append(num8)
+            if (y=='*')&(len(part)==2):
+                ratio = int(part[0])*int(part[1])
+                product.append(ratio)
+
+
             
 
 
 
 # add number to part
 
-print(sum([eval(i) for i in part]))
+print(sum(product))
