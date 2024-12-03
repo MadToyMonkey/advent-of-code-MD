@@ -1,6 +1,7 @@
 # Part 1
 import numpy as np
-import pandas as pd
+
+# import pandas as pd
 
 # import data from txt
 with open("2024\Day_02\data.txt", "r") as f:
@@ -65,12 +66,16 @@ def remove_unsafe_level(report):
 
         if is_neither_increasing_nor_decreasing(report[x]):
             lst = report[x]
-            if all(lst[i] <= lst[i + 1] for i in range(len(lst) - 1)): 
+            if all(lst[i] <= lst[i + 1] for i in range(len(lst) - 1)):
                 # if increasing: find and remove first decrease
                 for i in range(len(lst) - 1):
-                    if lst[i] > lst[i + 1]: del report
-            elif all(lst[i] >= lst[i + 1] for i in range(len(lst) - 1)): 
+                    if lst[i] > lst[i + 1]:
+                        del report[x][i]
+            elif all(lst[i] >= lst[i + 1] for i in range(len(lst) - 1)):
                 # if decreasing: find and remove first increase
+                for i in range(len(lst) - 1):
+                    if lst[i] < lst[i + 1]:
+                        del report[x][i]
             # print(is_neither_increasing_nor_decreasing(report[x]))
         x += 1
         # print(count)
@@ -88,3 +93,4 @@ good, bad = detect_changes(data)
 good_now = remove_unsafe_level(bad)
 new_good, new_bad = detect_changes(good_now)
 print(f"Total Safe: {len(good) + len(new_good)}")
+print(new_bad)
